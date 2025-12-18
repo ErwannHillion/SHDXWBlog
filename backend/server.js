@@ -16,6 +16,7 @@ app.get("/", (_, res) => {
 });
 
 app.use('/auth', require('./src/routes/auth.routes'));
+app.use('/posts', require('./src/routes/posts.routes'));
 
 const PORT = process.env.API_PORT || 3000
 
