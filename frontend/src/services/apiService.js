@@ -122,5 +122,52 @@ export const apiService = {
         }
 
         return data;
+    },
+
+    async getCommentsByPost(postId) {
+        const response = await fetch(`${API_URL}/post-comments/posts/${postId}/comments`);
+        const data = await response.json();
+
+        if (data.error) {
+            throw new Error(data.message || 'Erreur de récupération des commentaires');
+        }
+
+        return data;
+    },
+
+    async createComment(postId, content, token) {
+        const response = await fetch(`${API_URL}/post-comments/posts/${postId}/comments`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ content })
+        });
+
+        const data = await response.json();
+
+        if (data.error) {
+            throw new Error(data.message || 'Erreur de création du commentaire');
+        }
+
+        return data;
+    },
+
+    async deleteComment(commentId, token) {
+        const response = await fetch(`${API_URL}/post-comments/comments/${commentId}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        const data = await response.json();
+
+        if (data.error) {
+            throw new Error(data.message || 'Erreur de suppression du commentaire');
+        }
+
+        return data;
     }
 };
