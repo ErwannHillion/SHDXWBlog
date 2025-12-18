@@ -96,6 +96,16 @@ function MyPostsPage() {
                                     Supprimer
                                 </button>
                             </div>
+                            <button
+                                onClick={() => handleDelete(post._id)}
+                                style={{
+                                    background: 'transparent',
+                                    border: '1px solid #ef4444',
+                                    color: '#ef4444'
+                                }}
+                            >
+                                Supprimer
+                            </button>
                         </div>
                     ))}
                 </div>
