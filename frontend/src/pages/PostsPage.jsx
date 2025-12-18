@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { apiService } from '../services/apiService';
+import CommentSection from '../components/CommentSection';
 
 function PostsPage() {
     const [posts, setPosts] = useState([]);
@@ -67,6 +68,9 @@ function PostsPage() {
                                 <p>Auteur : {post.author?.username || post.author || 'Anonyme'}</p>
                                 <p>Date : {new Date(post.createdAt).toLocaleDateString('fr-FR')}</p>
                             </div>
+
+                            {/* Section des commentaires */}
+                            <CommentSection postId={post._id} />
                         </div>
                     ))}
                 </div>
