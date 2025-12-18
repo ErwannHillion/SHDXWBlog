@@ -24,7 +24,7 @@ function LoginPage() {
 
         try {
             const data = await apiService.login(email, password);
-            login({ email, username: data.data?.username }, data.data.token);
+            login({ email, username: data.data?.username, _id: data.data?.userId }, data.data.token);
             navigate('/');
         } catch (err) {
             setError(err.message);

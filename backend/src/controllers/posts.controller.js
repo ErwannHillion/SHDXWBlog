@@ -13,6 +13,12 @@ exports.getAllPosts = async (req, res) => {
     return res.status(result.statusCode).json(result);
 };
 
+exports.getMyPosts = async (req, res) => {
+    const userId = req.user.userId;
+    const result = await postsService.getPostsByUserId(userId);
+    return res.status(result.statusCode).json(result);
+};
+
 exports.getPostById = async (req, res) => {
     const { id } = req.params;
 

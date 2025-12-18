@@ -31,5 +31,77 @@ export const apiService = {
         }
 
         return data;
+    },
+
+    async getAllPosts() {
+        const response = await fetch(`${API_URL}/posts`);
+        const data = await response.json();
+
+        if (data.error) {
+            throw new Error(data.message || 'Erreur de récupération des posts');
+        }
+
+        return data;
+    },
+
+    async getMyPosts(token) {
+        const response = await fetch(`${API_URL}/posts/my-posts`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        const data = await response.json();
+
+        if (data.error) {
+            throw new Error(data.message || 'Erreur de récupération de vos posts');
+        }
+
+        return data;
+    },
+
+    async createPost(title, content, token) {
+        const response = await fetch(`${API_URL}/posts`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ title, content })
+        });
+
+        if (!response.ok) {
+            const text = await response.text();
+            try {
+                const data = JSON.parse(text);
+                throw new Error(data.message || 'Erreur de création du post');
+            } catch {
+                throw new Error(`Erreur ${response.status}: ${text || 'Erreur serveur'}`);
+            }
+        }
+
+        const data = await response.json();
+
+        if (data.error) {
+            throw new Error(data.message || 'Erreur de création du post');
+        }
+
+        return data;
+    },
+
+    async deletePost(postId, token) {
+        const response = await fetch(`${API_URL}/posts/${postId}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        const data = await response.json();
+
+        if (data.error) {
+            throw new Error(data.message || 'Erreur de suppression');
+        }
+
+        return data;
     }
 };

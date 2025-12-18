@@ -45,6 +45,24 @@ exports.getAllPosts = async () => {
     }
 };
 
+exports.getPostsByUserId = async (userId) => {
+    try {
+        const posts = await Post.find({ author: userId }).populate('author', 'username email').sort({ createdAt: -1 });
+
+        return {
+            error: false,
+            data: posts,
+            statusCode: 200
+        };
+    } catch (error) {
+        return {
+            error: true,
+            message: error.message,
+            statusCode: 500
+        };
+    }
+};
+
 exports.getPostById = async (postId) => {
     try {
         const post = await Post.findById(postId).populate('author', 'username email');

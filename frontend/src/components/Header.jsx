@@ -20,16 +20,18 @@ function Header() {
                 margin: '0 auto'
             }}>
                 <Link to="/" style={{ color: 'white' }}>Accueil</Link>
+                <Link to="/posts" style={{ color: 'white' }}>Posts</Link>
                 {user ? (
                     <>
-                        <Link to="/admin" style={{ color: 'white' }}>Admin</Link>
+                        <Link to="/my-posts" style={{ color: 'white' }}>Mes posts</Link>
+                        <Link to="/create-post" style={{ color: 'white' }}>Créer</Link>
                         <span style={{ marginLeft: 'auto', fontSize: '0.9rem', color: '#8b5cf6' }}>
                             {user.email}
                         </span>
                     </>
                 ) : (
                     <>
-                        <Link to="/login" style={{ color: 'white' }}>Connexion</Link>
+                        <Link to="/login" style={{ color: 'white', marginLeft: 'auto' }}>Connexion</Link>
                         <Link to="/signup" style={{ color: 'white' }}>Inscription</Link>
                     </>
                 )}

@@ -7,6 +7,7 @@ const authenticate = require("../middlewares/authenticate.middleware");
 
 router.post('/', authenticate, validateWithJoi(createPostSchema), postsController.createPost);
 router.get('/', postsController.getAllPosts);
+router.get('/my-posts', authenticate, postsController.getMyPosts);
 router.get('/:id', postsController.getPostById);
 router.patch('/:id', authenticate, validateWithJoi(updatePostSchema), postsController.updatePost);
 router.delete('/:id', authenticate, postsController.deletePost);
