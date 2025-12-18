@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { apiService } from '../services/apiService';
 
@@ -7,6 +8,7 @@ function MyPostsPage() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const { token } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     useEffect(() => {
         loadMyPosts();
@@ -72,16 +74,28 @@ function MyPostsPage() {
                                 Créé le {new Date(post.createdAt).toLocaleDateString()}
                             </p>
                             <p style={{ lineHeight: '1.6', marginBottom: '1rem' }}>{post.content}</p>
-                            <button
-                                onClick={() => handleDelete(post._id)}
-                                style={{
-                                    background: 'transparent',
-                                    border: '1px solid #ef4444',
-                                    color: '#ef4444'
-                                }}
-                            >
-                                Supprimer
-                            </button>
+                            <div style={{ display: 'flex', gap: '1rem' }}>
+                                <button
+                                    onClick={() => navigate(`/edit-post/${post._id}`)}
+                                    style={{
+                                        background: 'transparent',
+                                        border: '1px solid #8b5cf6',
+                                        color: '#8b5cf6'
+                                    }}
+                                >
+                                    Modifier
+                                </button>
+                                <button
+                                    onClick={() => handleDelete(post._id)}
+                                    style={{
+                                        background: 'transparent',
+                                        border: '1px solid #ef4444',
+                                        color: '#ef4444'
+                                    }}
+                                >
+                                    Supprimer
+                                </button>
+                            </div>
                         </div>
                     ))}
                 </div>

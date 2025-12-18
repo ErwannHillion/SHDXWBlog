@@ -103,5 +103,24 @@ export const apiService = {
         }
 
         return data;
+    },
+
+    async updatePost(postId, title, content, token) {
+        const response = await fetch(`${API_URL}/posts/${postId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ title, content })
+        });
+
+        const data = await response.json();
+
+        if (data.error) {
+            throw new Error(data.message || 'Erreur de modification');
+        }
+
+        return data;
     }
 };
