@@ -107,7 +107,7 @@ export const apiService = {
 
     async updatePost(postId, title, content, token) {
         const response = await fetch(`${API_URL}/posts/${postId}`, {
-            method: 'PUT',
+            method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
