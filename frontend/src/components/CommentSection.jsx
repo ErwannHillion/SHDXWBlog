@@ -28,7 +28,7 @@ function CommentSection({ postId }) {
 
     const handleSubmitComment = async (e) => {
         e.preventDefault();
-        
+
         if (!token) {
             setError('Vous devez être connecté pour commenter');
             return;
@@ -76,10 +76,10 @@ function CommentSection({ postId }) {
             </h3>
 
             {error && (
-                <div style={{ 
-                    padding: '0.75rem', 
-                    backgroundColor: '#ff000020', 
-                    border: '1px solid #ff0000', 
+                <div style={{
+                    padding: '0.75rem',
+                    backgroundColor: '#ff000020',
+                    border: '1px solid #ff0000',
                     borderRadius: '4px',
                     marginBottom: '1rem',
                     color: '#ff6b6b'
@@ -126,9 +126,9 @@ function CommentSection({ postId }) {
                     </button>
                 </form>
             ) : (
-                <p style={{ 
-                    padding: '1rem', 
-                    backgroundColor: '#2a2a2a', 
+                <p style={{
+                    padding: '1rem',
+                    backgroundColor: '#2a2a2a',
                     borderRadius: '4px',
                     marginBottom: '1.5rem',
                     color: '#aaa',
@@ -155,28 +155,28 @@ function CommentSection({ postId }) {
                                 border: '1px solid #444'
                             }}
                         >
-                            <div style={{ 
-                                display: 'flex', 
-                                justifyContent: 'space-between', 
+                            <div style={{
+                                display: 'flex',
+                                justifyContent: 'space-between',
                                 alignItems: 'flex-start',
                                 marginBottom: '0.5rem'
                             }}>
                                 <div>
-                                    <p style={{ 
-                                        fontWeight: 'bold', 
+                                    <p style={{
+                                        fontWeight: 'bold',
                                         color: '#8b5cf6',
                                         fontSize: '0.9rem'
                                     }}>
                                         {comment.author?.username || 'Anonyme'}
                                     </p>
-                                    <p style={{ 
-                                        fontSize: '0.8rem', 
+                                    <p style={{
+                                        fontSize: '0.8rem',
                                         color: '#888'
                                     }}>
                                         {new Date(comment.createdAt).toLocaleString('fr-FR')}
                                     </p>
                                 </div>
-                                
+
                                 {user && comment.author?._id === user.userId && (
                                     <button
                                         onClick={() => handleDeleteComment(comment._id)}
@@ -196,7 +196,7 @@ function CommentSection({ postId }) {
                                     </button>
                                 )}
                             </div>
-                            
+
                             <p style={{ color: '#ccc', lineHeight: '1.5' }}>
                                 {comment.content}
                             </p>
