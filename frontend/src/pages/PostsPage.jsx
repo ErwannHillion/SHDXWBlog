@@ -69,7 +69,6 @@ function PostsPage() {
                                 <p>Date : {new Date(post.createdAt).toLocaleDateString('fr-FR')}</p>
                             </div>
 
-                            {/* Section des commentaires */}
                             <CommentSection postId={post._id} />
                         </div>
                     ))}

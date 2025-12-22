@@ -53,7 +53,7 @@ export const apiService = {
         const data = await response.json();
 
         if (data.error) {
-            throw new Error(data.message || 'Erreur de récupération de vos posts');
+            throw new Error(data.message || 'Erreur de récuperation de vos posts');
         }
 
         return data;
@@ -73,7 +73,7 @@ export const apiService = {
             const text = await response.text();
             try {
                 const data = JSON.parse(text);
-                throw new Error(data.message || 'Erreur de création du post');
+                throw new Error(data.message || 'Erreur de creation du post');
             } catch {
                 throw new Error(`Erreur ${response.status}: ${text || 'Erreur serveur'}`);
             }
@@ -82,7 +82,7 @@ export const apiService = {
         const data = await response.json();
 
         if (data.error) {
-            throw new Error(data.message || 'Erreur de création du post');
+            throw new Error(data.message || 'Erreur de creation du post');
         }
 
         return data;

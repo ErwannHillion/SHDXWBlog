@@ -5,7 +5,7 @@ exports.createComment = async (postId, content, userId) => {
     try {
         const post = await Post.findById(postId);
         if (!post) {
-            return { statusCode: 404, message: 'Post not found' };
+            return { statusCode: 404, message: 'Post non trouvé' };
         }
 
         const comment = await Comment.create({
@@ -16,9 +16,9 @@ exports.createComment = async (postId, content, userId) => {
 
         const commentWithAuthor = await Comment.findById(comment._id).populate('author', 'username email');
 
-        return { statusCode: 201, message: 'Comment created', data: commentWithAuthor };
+        return { statusCode: 201, message: 'Commentaire créé', data: commentWithAuthor };
     } catch (error) {
-        return { statusCode: 500, message: 'Error creating comment', error: error.message };
+        return { statusCode: 500, message: 'Erreur de création', error: error.message };
     }
 };
 
@@ -30,7 +30,7 @@ exports.getCommentsByPostId = async (postId) => {
 
         return { statusCode: 200, data: comments };
     } catch (error) {
-        return { statusCode: 500, message: 'Error fetching comments', error: error.message };
+        return { statusCode: 500, message: 'Erreur lors de la récupération des commentaires', error: error.message };
     }
 };
 
@@ -39,11 +39,11 @@ exports.updateComment = async (commentId, content, userId) => {
         const comment = await Comment.findById(commentId);
 
         if (!comment) {
-            return { statusCode: 404, message: 'Comment not found' };
+            return { statusCode: 404, message: 'Commentaire non trouvé' };
         }
 
         if (comment.author.toString() !== userId) {
-            return { statusCode: 403, message: 'Unauthorized to update this comment' };
+            return { statusCode: 403, message: 'Non autorisé à mettre à jour ce commentaire' };
         }
 
         comment.content = content;
@@ -51,9 +51,9 @@ exports.updateComment = async (commentId, content, userId) => {
 
         const updatedComment = await Comment.findById(commentId).populate('author', 'username email');
 
-        return { statusCode: 200, message: 'Comment updated', data: updatedComment };
+        return { statusCode: 200, message: 'Commentaire mis à jour', data: updatedComment };
     } catch (error) {
-        return { statusCode: 500, message: 'Error updating comment', error: error.message };
+        return { statusCode: 500, message: 'Erreur lors de la mise à jour du commentaire', error: error.message };
     }
 };
 
@@ -62,17 +62,17 @@ exports.deleteComment = async (commentId, userId) => {
         const comment = await Comment.findById(commentId);
 
         if (!comment) {
-            return { statusCode: 404, message: 'Comment not found' };
+            return { statusCode: 404, message: 'Commentaire non trouvé' };
         }
 
         if (comment.author.toString() !== userId) {
-            return { statusCode: 403, message: 'Unauthorized to delete this comment' };
+            return { statusCode: 403, message: 'Non autorisé' };
         }
 
         await comment.deleteOne();
 
-        return { statusCode: 200, message: 'Comment deleted' };
+        return { statusCode: 200, message: 'Commentaire supprimé' };
     } catch (error) {
-        return { statusCode: 500, message: 'Error deleting comment', error: error.message };
+        return { statusCode: 500, message: 'Erreur lors de la suppression du commentaire', error: error.message };
     }
 };

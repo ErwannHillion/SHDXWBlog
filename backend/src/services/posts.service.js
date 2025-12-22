@@ -14,7 +14,7 @@ exports.createPost = async (data, userId) => {
 
         return {
             error: false,
-            message: "Post créé avec succès",
+            message: "Post créé avec succes",
             data: newPost,
             statusCode: 201
         };

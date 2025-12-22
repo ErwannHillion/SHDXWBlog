@@ -10,6 +10,40 @@ function MyPostsPage() {
     const { token } = useContext(AuthContext);
     const navigate = useNavigate();
 
+    if (!token) {
+        return (
+            <div style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                minHeight: '60vh',
+                textAlign: 'center'
+            }}>
+                <h1 style={{ fontSize: '3rem', marginBottom: '1rem', color: '#ef4444' }}>
+                    Unauthorized
+                </h1>
+                <p style={{ fontSize: '1.2rem', color: '#999', marginBottom: '2rem' }}>
+                    Vous devez être connecté pour accéder à cette page
+                </p>
+                <button
+                    onClick={() => navigate('/login')}
+                    style={{
+                        padding: '0.75rem 1.5rem',
+                        backgroundColor: '#8b5cf6',
+                        color: 'white',
+                        border: 'none',
+                        borderRadius: '4px',
+                        cursor: 'pointer',
+                        fontSize: '1rem'
+                    }}
+                >
+                    Se connecter
+                </button>
+            </div>
+        );
+    }
+
     useEffect(() => {
         loadMyPosts();
     }, []);
