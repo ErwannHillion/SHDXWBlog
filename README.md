@@ -48,7 +48,3 @@ Objectif : permettre à des utilisateurs inscrits de publier des articles, les c
 - Messages d’erreur clairs.
 - Messages de succès après les actions CRUD.
 - Interface simple et lisible.
-
----
-
-## Architecture du projet
